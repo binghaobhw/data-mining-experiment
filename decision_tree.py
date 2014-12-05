@@ -19,10 +19,10 @@ def entropy(labels):
 def conditional_entropy(instances, labels, feature_index):
     """Return conditional entropy and a dict mapping feature to instance index.
 
-    :param instances:
-    :param feature_index:
-    :param labels:
-    :return: float, {}
+    :param instances: [[]]
+    :param feature_index: [int]
+    :param labels: [str]
+    :return: float, {str: [int]}
     """
     total_num = len(labels)
     conditional_entropy_ = 0.
@@ -46,6 +46,13 @@ def conditional_entropy(instances, labels, feature_index):
 
 
 def gain(instances, feature_index, labels):
+    """Calculate information gain for given feature.
+
+    :param instances: [[]]
+    :param feature_index: [int]
+    :param labels: [str]
+    :return: float, {str: [int]}
+    """
     conditional_entropy_, feature_instances_index_dict = conditional_entropy(
         instances, labels, feature_index)
     return entropy(labels) - conditional_entropy_, feature_instances_index_dict
@@ -149,11 +156,6 @@ class DecisionTree(object):
             if isinstance(node, LeafNode):
                 result.append(node.label)
         return result
-
-symbols = ['━', '┗', '┣']
-def print_tree(tree, indent):
-    if isinstance(tree, DecisionNode):
-        print ' '*indent
 
 
 def main():

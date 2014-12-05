@@ -4,16 +4,17 @@ from math import sqrt
 import random
 from StringIO import StringIO
 import numpy
-import sys
 
 
 def initialize_k_center(points, k):
+    """Randomly choose k points as initial centers."""
     index_list = random.sample(range(0, len(points)), k)
     centers = [points[i] for i in index_list]
     return centers
 
 
 def distance(a, b):
+    """Calculate Euclidean distance between a and b."""
     sum_ = 0
     for x, y in zip(a, b):
         sum_ += (x-y)**2
